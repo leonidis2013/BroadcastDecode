@@ -3,6 +3,22 @@
 The prototype is only the player: NDI in, HDMI video + audio out. There is no web page yet.
 It has not been run on hardware yet, so expect a first round of fixes.
 
+## Quick install (recommended)
+On the Pi, with Ethernet and (ideally) the display connected:
+```
+sudo apt-get install -y git
+git clone https://github.com/leonidis2013/BroadcastDecode
+cd BroadcastDecode
+sudo ./install.sh
+```
+The installer finds or downloads the NDI SDK (it asks you to accept NDI's license), builds the player,
+shows the NDI sources it can see so you can pick one, picks the HDMI audio output, and starts the service.
+If the automatic SDK download fails, download "NDI SDK for Linux" from the NDI site, put the `.tar.gz` in
+your home folder, and run `sudo ./install.sh` again. Update later with `git pull && sudo ./install.sh`.
+`./install.sh --help` lists the options (`--reconfigure`, `--uninstall`, ...).
+
+The manual steps below do the same thing by hand.
+
 ## You need
 - Raspberry Pi 5 with Raspberry Pi OS Lite 64-bit (Trixie), wired Ethernet, an HDMI display or capture device
 - The NDI SDK for Linux (free, but you must download it yourself and accept NDI's license):

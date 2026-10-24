@@ -18,7 +18,7 @@ echo "Using NDI libs: $NDI_LIB_ARCH"
 
 apt-get update
 apt-get install -y build-essential cmake pkg-config libdrm-dev libasound2-dev nlohmann-json3-dev \
-  avahi-daemon libavcodec-dev libavutil-dev   # avahi = NDI discovery; ffmpeg libs = HX decoding
+  avahi-daemon alsa-utils python3 libavcodec-dev libavutil-dev   # avahi = NDI discovery; ffmpeg libs = HX decoding
 
 cmake -S "$REPO" -B "$REPO/build" -DNDI_SDK_DIR="$NDI_SDK_DIR" -DNDI_LIB_ARCH="$NDI_LIB_ARCH"
 cmake --build "$REPO/build" -j"$(nproc)"
