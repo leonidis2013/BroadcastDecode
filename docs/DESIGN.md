@@ -1,4 +1,4 @@
-# BroadcastDecode — Design (v0.1.0)
+# BroadcastDecode — Design (v0.2.0)
 
 ## 1. Goal
 A small, headless, auto-booting NDI-to-HDMI decoder. Power it on, it connects to the last-selected NDI source and shows clean video with HDMI audio. All setup happens from a web page.
@@ -49,6 +49,11 @@ A small, headless, auto-booting NDI-to-HDMI decoder. Power it on, it connects to
 4. NDI discovery across VLANs (mDNS does not cross subnets); validate Discovery Server / manual IP path.
 5. HDMI audio behavior with the target displays/switchers (sample rate, channel count, EDID).
 6. NDI SDK license terms for distribution; SDK is downloaded at build time, not stored in the repo.
+
+## 5a. Image strategy
+Yes, the end goal is a stripped-down custom image, but it comes in two stages so we are not building an image around code that does not work yet:
+1. **0.2.0 – 0.5.0:** stock Raspberry Pi OS Lite (64-bit, Trixie) plus `scripts/setup-pi.sh`, which installs only what the player needs and enables the services. Same approach as LivePi. Easy to iterate on.
+2. **0.6.0:** a flashable image built with Raspberry Pi's `pi-gen` tooling (built by GitHub): Lite base with unneeded packages removed, no desktop, read-only root, `/config` partition, the player and web service preinstalled, per-unit hostname set on first boot. The NDI SDK library is not redistributed in the image unless NDI's license allows it; otherwise the first boot downloads or the web page prompts for it (to be checked before 0.6.0).
 
 ## 6. Milestones
 - **0.1.0** Design document (this).

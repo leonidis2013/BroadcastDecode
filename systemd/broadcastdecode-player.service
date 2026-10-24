@@ -1,0 +1,17 @@
+[Unit]
+Description=BroadcastDecode NDI player
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/bdecode-player --config /config/config.json
+Restart=always
+RestartSec=2
+# Prototype runs as root so it can own the display (DRM master) and the audio device.
+# Later versions will drop to a dedicated user in the video/audio groups.
+User=root
+Environment=LD_LIBRARY_PATH=/usr/local/lib
+
+[Install]
+WantedBy=multi-user.target
